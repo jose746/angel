@@ -1,0 +1,2062 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>EVOLUCION</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+
+    <!-- Reset y estilos desde CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css/normalize.css">
+
+  <!-- Bootstrap desde CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+  <!-- Animate.css desde CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
+
+  <!-- Google Fonts desde CDN -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+/* ... Tu CSS ... */
+:root {
+      --neon-color: #00fff7;
+      --bg-color: #0f0f0f;
+      --text-color: #ffffff;
+      --anim-duration: 2s;
+    }
+
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ html {
+   background: #000000;
+}
+
+ body {
+    padding-top: env(safe-area-inset-top, 0);
+    padding-bottom: calc(81px + env(safe-area-inset-bottom, 0));
+    background: #000000;
+    min-height: 100vh;
+    margin-top:0;
+    position:relative;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6; 
+    color: #e1e1e1;
+    overflow-x: hidden;
+}
+
+.titulo-destacado {
+      font-size: 2.5rem;
+      color: #00ffff;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px #00fff7;
+    }
+
+    .texto-inicio {
+        text-align: center;
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-bottom: 3rem;
+    }
+
+#page-home {
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+.titulo-destacado {
+    text-align: center;
+    font-size: 28px;
+    color: #ff4500;
+    margin-bottom: 30px;
+    padding: 0 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.feed-container {
+    display: grid;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.post-card {
+    background: rgb(0, 0, 0);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(21, 21, 21, 0.98);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.post-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.post-image:hover {
+    opacity: 0.95;
+}
+
+.post-description {
+    padding: 16px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #f7f7f7;
+}
+
+/* === INTRO/CANVAS STYLES === */
+#intro {
+  position: fixed;
+  inset: 0;
+  background: #000000;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1.4s ease;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#logo {
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 0;
+  max-width: 90vw;
+  max-height: 90vh;
+  transform: scale(0.4);
+  transition: opacity 1.4s ease-in-out, transform 0.4s cubic-bezier(0.2, 1, 0.3, 1);
+  filter: drop-shadow(0 0 70px rgb(0, 0, 0));
+  animation: aparecerLogo 2.3s ease-out forwards;
+}
+
+@keyframes aparecerLogo {
+  0% { opacity: 0; transform: scale(0.5); }
+  100% { opacity: 1; transform: scale(1.5); }
+}
+
+#logo.show {
+  transition: opacity 1.4s ease-in-out;
+  opacity: 1;
+  transform: scale(1.5);
+}
+
+#text {
+  margin-top: 1vh;
+  font: 900 clamp(3.2rem, 13vw, 9rem)/1 'Montserrat', sans-serif;
+  color: rgb(239, 239, 239);
+  text-shadow: 0 0 40px rgba(23, 214, 16, 0.622), 0 0 90px rgba(0, 0, 0, 0.939);
+  letter-spacing: 9px;
+  opacity: 0; /* Inicia oculto */
+  text-align: center;
+  padding: 0 15px;
+  display: inline-block;
+  transform-origin: bottom;
+  animation: aparecerTextoSuave 3s ease-out forwards;
+}
+
+@keyframes aparecerTextoSuave {
+    0% {
+    opacity: 0;
+    transform: scaleY(1);
+    color: rgb(0, 0, 0); 
+  }
+  30% {
+    opacity: 1;
+    transform: scaleY(1);
+    color: #000000; 
+  }
+  70% {
+    transform: scaleY(4);
+    color: rgb(28, 28, 28); 
+  }
+  100% {
+    transform: scaleY(10);
+    color: rgb(255, 255, 255); 
+  }
+}
+
+#text.show {
+  opacity: 1;
+  animation: aparecerTextoSuave 2.5s ease-out forwards;
+}
+
+/* === CONTENIDO PRINCIPAL Y GALERÍA === */
+
+#main {
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  min-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #bcbcbc;
+  color: white;
+  padding: 0;
+  text-align: center;
+}
+
+#page-home {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 0;
+    padding: 15px 0; 
+    color: #050505;
+    background-color: #000000;
+    text-align: left;
+    padding-left: 15px; 
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); 
+    gap: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.gallery-item {
+    cursor: pointer;
+    border-radius: 0;
+    overflow: hidden;
+    background: #000000;
+    box-shadow: none;
+    border-bottom: 1px solid #e4e6eb;
+    border-right: none;
+    transition: background-color 0.2s;
+}
+
+.gallery-item:hover {
+    background-color: #000000;
+    color: #e4e6eb;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-item-description {
+    padding: 12px 15px;
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 1.4;
+    text-align: left;
+}
+
+/* === MEDIA QUERIES (RESPONSIVE) === */
+
+@media (min-width: 1201px) {
+    .gallery-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .gallery-item {
+        border-right: 1px solid #e4e6eb;
+    }
+    .gallery-item:nth-child(3n) {
+        border-right: none;
+    }
+    .page-title {
+        font-size: 28px;
+        padding: 20px 0;
+        padding-left: 30px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+    .gallery-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .gallery-item {
+        border-right: 1px solid #e4e6eb;
+    }
+    .gallery-item:nth-child(2n) {
+        border-right: none;
+    }
+    .page-title {
+        font-size: 24px;
+        padding: 18px 0;
+        padding-left: 25px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .gallery-item {
+        border-right: none;
+    }
+    .page-title {
+        font-size: 20px;
+        padding: 12px 0;
+        padding-left: 15px;
+    }
+    .gallery-item-description { padding: 10px 15px; font-size: 14px; }
+    .visor-description-container { max-height: 120px; padding: 15px; }
+    .visor-close { width: 38px; height: 38px; font-size: 22px; }
+    .image-visor.active .visor-image-container { height: calc(100vh - 120px); }
+}
+
+@media (max-width: 480px) {
+    .gallery-item {
+        border-right: none;
+    }
+    .page-title {
+        font-size: 18px;
+        padding: 10px 0;
+        padding-left: 12px;
+    }
+    .gallery-item-description { padding: 10px 12px; font-size: 13px; }
+    .visor-close { width: 36px; height: 36px; font-size: 20px; top: 10px; right: 10px; }
+    .visor-description-container { max-height: 100px; padding: 12px; }
+    .visor-description { font-size: 14px; }
+    .image-visor.active .visor-image-container { height: calc(100vh - 100px); }
+}
+
+/* === CÓDIGO DEL VISOR === */
+
+.image-visor {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.image-visor.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.visor-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10002;
+    transition: background-color 0.2s, opacity 0.25s ease-out;
+    will-change: opacity;
+    width: 44px; /* Añadido tamaño para el icono de cierre */
+    height: 44px;
+    font-size: 24px;
+}
+
+.visor-close.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.visor-close:hover {
+    background-color: rgba(68, 73, 80, 1);
+}
+
+.visor-image-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: none;
+    cursor: pointer;
+    background-color: #000;
+}
+
+.visor-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.visor-image {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    user-select: none;
+    -webkit-user-select: none;
+    object-fit: contain;
+}
+
+.visor-description-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #000000;
+    color: #e4e6eb;
+    overflow-y: auto;
+    transition: transform 0.25s ease-out;
+    transform: translateY(0);
+    z-index: 10001;
+    will-change: transform;
+    max-height: 150px; /* Tamaño por defecto en escritorio */
+    padding: 20px;
+}
+
+.visor-description-container.hidden {
+    transform: translateY(100%);
+}
+
+.visor-description {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.hr-fade {
+   
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #ffffff, transparent);
+    margin: 40px 0;
+  }
+
+/* --- General Sections --- */
+.page-section {
+    visibility: hidden; 
+    display: none; 
+    padding: 20px;
+    min-height: calc(100vh - 100px);
+    max-width: 1200px; 
+    margin: 0 auto; 
+}
+
+.page-section.active {
+    visibility: visible; 
+    display: block;
+}
+
+/* --- Products Grid - AHORA EN COLUMNA ÚNICA --- */
+.products-grid {
+    display: flex; 
+    flex-direction: column; 
+    gap: 30px;
+    padding: 20px 0;
+}
+
+/* Home Grid - Single Column - MANTENEMOS TU ESTILO */
+#featured-products {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+    gap: 30px;
+    padding: 20px 0;
+}
+
+#featured-products .product-card {
+    width: 100%;
+}
+
+.products-grid .product-card {
+    width: 100%;
+}
+
+.product-image {
+    border-radius: 10px;
+    border: 3px solid #ededed;
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(45deg, #000000, #000000);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 8px;
+    display: block;
+}
+
+.product-name {
+    text-align: center;
+    color: #f5f5f5;
+    font-size: 1.2em;
+    margin: 10px 0;
+    text-shadow: 0 0 10px #b9b9b9;
+}
+
+.product-price {
+    text-align: center;
+    color: #ffbf00;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-shadow: 0 0 10px #ffe600c4;
+}
+
+/* --- Categories --- */
+.categories-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 40px 20px;
+}
+
+.category-btn {
+    background: linear-gradient(135deg, #000000, #000000);
+    border: 3px solid #ebebeb;
+    color: #ebebeb;
+    padding: 40px 20px;
+    font-size: 1.5em;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    text-shadow: 0 0 10px #414242;
+    text-align: center; 
+}
+
+.category-btn:hover {
+    background: linear-gradient(135deg, #0f3460, #1a1a2e);
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+    transform: scale(1.05);
+}
+
+.category-view {
+    display: none;
+}
+
+.category-view.active {
+    display: block;
+}
+
+/* --- Modal --- */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #000000, #000000);
+    z-index: 9999; 
+    overflow-y: auto;
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0 90px; 
+}
+
+.modal-content {
+    text-align: center;
+    display: flex; 
+    flex-direction: row; 
+    gap: 20px; 
+    background: linear-gradient(to bottom, #000000 0%, #000000 50%, #000000 100%);
+    border: 3px solid #fdfdfd;
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 900px; 
+    width: 90%;
+    position: relative;
+    box-shadow: 0 0 50px rgba(0, 255, 255, 0.6);
+}
+
+.modal-close {
+    z-index: 1000;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 48px;
+    height: 48px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ff0000;
+    text-shadow: 0 0 10px #ff00ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-close svg {
+    width: 35px;
+    height: 35px;
+    stroke: #ff0000;
+    stroke-width: 2.5;
+  }
+
+.modal-gallery {
+    flex: 1; 
+    position: relative;
+    min-height: 300px; 
+}
+
+.modal-image {
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(135deg, #ffffff, #efefef);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5em;
+    overflow: hidden; 
+}
+
+.modal-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.modal-info {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+
+.gallery-nav {
+    position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
+    background: rgba(123, 123, 123, 0);
+    border: 2px solid #000000;
+    color: #000000;
+    font-size: 2em;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 5px;
+    z-index: 10;
+    transition: background 0.2s;
+}
+
+.gallery-nav:hover {
+    background: rgba(0, 0, 0, 0.402);
+    border: 2px solid #f9f9f9;
+    color: #ffffff;
+}
+
+.gallery-nav.prev { left: 10px; }
+.gallery-nav.next { right: 10px; }
+
+.gallery-counter {
+    text-align: center;
+    color: #dfdfdf;
+    margin-top: 10px;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.modal-info h2 {
+    color: #00fbff;
+    margin-bottom: 10px;
+    text-shadow: 0 0 15px #0044ff;
+}
+
+.modal-info p {
+    color: #fdfdfd;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.add-to-cart-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #dadada, #eeeeee);
+    border: none;
+    color: #000;
+    font-size: 1.3em;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s;
+}
+
+.add-to-cart-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgb(2, 225, 255);
+}
+
+/* --- Cart --- */
+.cart-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.cart-item {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #00ecfd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: space-between; 
+}
+
+.cart-item-image {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, #000000, #000000);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    overflow: hidden;
+}
+
+.cart-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cart-item-info {
+    flex: 1; 
+    margin-right: 15px; 
+}
+
+/* Order Form & Confirm Button */
+.order-form {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    color: #ffffff;
+    margin-bottom: 5px;
+    text-shadow: 0 0 10px #ffffff;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #ffffff;
+    color: #00ddff;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    font-size: 16px; 
+}
+
+.confirm-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700; 
+    width: 100%;
+    padding: 15px;
+    background: #0ef180; 
+    border: none;
+    color: #000;
+    font-size: 1.3em;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s;
+    box-shadow: 0 0 15px #0ef180;
+}
+
+.confirm-btn:hover {
+    background: #0ccf70;
+    box-shadow: 0 0 20px #0ef180;
+}
+
+/* --- Navigation Bar --- */
+.nav-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgb(0, 0, 0);
+    border-top: 1px solid #00000000;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 15px;
+    padding-bottom: calc(15px + env(safe-area-inset-bottom, 0)); 
+    z-index: 10000;
+    box-shadow: 0 -5px 20px rgb(0, 174, 255);
+}
+
+.nav-item {
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    flex: 1;
+    transition: all 0.3s;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.nav-item:hover {
+    transform: scale(1.1);
+}
+
+.nav-icon {
+    font-size: 2em;
+    color: #ffffff;
+    text-shadow: 0 0 10px #00ffff;
+    line-height: 1; 
+}
+
+.nav-item.active .nav-icon {
+    color: #0af3f7;
+    text-shadow: 0 0 20px #006aff;
+
+}
+
+.nav-item.active .nav-label {
+    color: #0af7f3;
+    text-shadow: 0 0 20px #006aff;
+}
+
+.nav-label {
+    font-size: 0.8em;
+    color: #ffffff;
+    margin-top: 5px;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: 25%;
+    background: #ff00ff;
+    color: #000000;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 0 10px #ff00ff;
+}
+
+/* Flying Image */
+.flying-image-clone {
+    box-sizing: border-box; 
+    border-radius: 50%; 
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px); 
+    }
+}
+
+/* Back Button */
+.back-btn {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    gap: 5px; 
+    width: 120px; 
+    height: 40px; 
+    background: none; 
+    border: 2px solid #00d9ff; 
+    color: #f0f0f0; 
+    cursor: pointer;
+    font-size: 16px; 
+    transition: background-color 0.2s ease;
+    margin-bottom: 20px;
+    display: inline-block;
+    text-shadow: 0 0 10px #00eeff;
+    box-shadow: 0 4px 12px rgb(4, 183, 233);
+}
+
+.back-btn:hover {
+    background: rgba(0, 195, 255, 0.5);
+    box-shadow: 0 4px 12px rgb(0, 0, 0);
+    color: #00d9ff;
+}
+
+/* WhatsApp Icon */
+.fa-whatsapp {
+    color: #000000; 
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .modal-content {
+        flex-direction: column; 
+        max-width: 95%; 
+    }
+    
+    .modal-gallery, .modal-info {
+        flex: none; 
+        width: 100%;
+    }
+
+    .header h1 { font-size: 3em; }
+    .products-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
+    .product-image { height: 150px; }
+    .modal-content { padding: 20px; }
+    .modal-image { height: 200px; font-size: 3em; }
+}
+
+@media (max-width: 480px) {
+    .header h1 { font-size: 1.5em; }
+    .products-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .category-btn { padding: 30px 15px; font-size: 1.2em; }
+    .nav-icon { font-size: 1.5em; }
+    
+    .cart-item {
+        display: grid;
+        grid-template-columns: 80px 1fr auto; 
+        grid-template-rows: auto;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .cart-item-image {
+        grid-column: 1 / 2;
+        grid-row: 1 / 3; 
+    }
+    
+    .cart-item-info {
+        grid-column: 2 / 3;
+        grid-row: 1 / 3;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .cart-item button { 
+        grid-column: 3 / 4;
+        grid-row: 1 / 3;
+        align-self: center;
+        height: 40px;
+    }
+    
+    .cart-container {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 360px) {
+    .header h1 { font-size: 1.3em; }
+    .product-card { padding: 10px; }
+    .category-btn { padding: 20px 10px; font-size: 1em; }
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    min-height: 200px;
+    background-color: #000000;
+    padding: 30px;
+    border-bottom: solid 3px rgb(41, 41, 41);
+    box-shadow: 0 0 20px rgb(3, 255, 209);
+}
+
+.logo-container {
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 1 / 1;
+    animation: fadeIn 2s ease-out;
+}
+
+.logo-img {
+    width: 100%;
+    height: 100%;
+    background-image: url('logolion.JPG'); /* Reemplaza con la ruta de tu imagen */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: drop-shadow(0 0 20px #00ffe0);
+    transform-origin: center;
+    position: relative;
+}
+
+.logo-img::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: inherit;
+    animation: wave 3s infinite ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+} 
+
+@keyframes wave {
+    0% { filter: hue-rotate(0deg); transform: scale(1) rotate(0deg); }
+    50% { filter: hue-rotate(20deg); transform: scale(1.05) rotate(1deg); }
+    100% { filter: hue-rotate(0deg); transform: scale(1) rotate(0deg); }
+}
+
+@media (max-width: 768px) {
+    .header { height: 25vh; }
+    .logo-container { max-width: 200px; }
+}
+
+@media (max-width: 480px) {
+    .header { height: 20vh; }
+    .logo-container { max-width: 150px; }
+}
+@media (min-width: 1024px) {
+    .header { height: 50vh; }
+    .logo-container { max-width: 200px; }
+}
+
+#edge-border-frame {
+    position: fixed;
+    top: env(safe-area-inset-top, 0);
+    right: env(safe-area-inset-right, 0);
+    bottom: env(safe-area-inset-bottom, 0);
+    left: env(safe-area-inset-left, 0);
+    width: auto;
+    height: auto;
+    z-index: 10000; 
+    pointer-events: none; 
+    overflow: hidden;
+
+    border: 6px solid transparent; 
+    border-top-width: 0; 
+    border-radius: 5px; 
+   
+    border-image: linear-gradient(
+        to bottom,
+        #04e4fd 0%,     
+        #ed0000 50%,    
+        #00d5ff 100%    
+    ) 1; 
+    box-shadow: 0 0 10px rgba(4, 253, 216, 0.5); 
+}
+
+#edge-border-frame::before,
+#edge-border-frame::after {
+    content: none !important;
+}
+
+.category-title {
+    color: #f0f0f0; 
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px #00d9ff; 
+}
+
+h1, h2, h3 {
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <body>
+
+        <div id="intro">
+            <canvas id="canvas"></canvas>
+            <img id="logo" src="angel2.PNG" alt="Logo">
+            <div id="text"></div>
+        </div>
+        
+        <div id="edge-border-frame"></div>
+    
+        <div id="main"> 
+    
+            <div class="header">
+                <div class="logo-container">
+                  <div class="logo-img"></div>
+                </div>
+            </div>
+            
+            <hr class="hr-fade">
+    
+    
+            <div id="page-home" class="page-section">
+                <h1 class="page-title">Mis Fotos</h1>
+                
+                <h2 class="titulo-destacado"> PRODUCTOS DESTACADOS 🔥</h2>
+                <p class="texto-inicio">Explora lo más innovador en moda y tecnología</p>
+    
+                <div class="gallery-container" id="galleryContainer">
+                    </div>
+            </div>
+    
+            <div class="image-visor" id="imageVisor">
+                <button class="visor-close" id="visorClose" aria-label="Cerrar">&times;</button>
+                
+                <div class="visor-image-container" id="visorImageContainer">
+                    <div class="visor-image-wrapper" id="visorImageWrapper">
+                        <img src="" alt="" class="visor-image" id="visorImage">
+                    </div>
+                </div>
+                
+                <div class="visor-description-container" id="visorDescriptionContainer">
+                    <p class="visor-description" id="visorDescription"></p>
+                </div>
+            </div>
+    
+            <div id="page-categories" class="page-section">
+                <div id="categories-main">
+                    <h2 style="text-align: center; color: #00ffff; margin-bottom: 30px; text-shadow: 0 0 15px #00ffff;">📦 CATEGORÍAS 📦</h2>
+                    <div class="categories-container">
+                        <button class="category-btn" onclick="showCategory('sudaderas')"> SUDADERAS</button>
+                        <button class="category-btn" onclick="showCategory('playeras')">👕 PLAYERAS</button>
+                        <button class="category-btn" onclick="showCategory('zapatos')">👟 ZAPATOS</button>
+                        <button class="category-btn" onclick="showCategory('pantalones')">👖 PANTALONES</button>
+                    </div>
+                </div>
+    
+                <div id="view-sudaderas" class="category-view">
+    
+                    <button class="back-btn" onclick="backToCategories()">
+                        <i data-lucide="arrow-left"></i> 
+                        Volver
+                    </button>
+                    
+                    <h2 class="category-title">🧥 SUDADERAS</h2>
+                    
+                    <div class="products-grid" id="products-sudaderas"></div>
+                </div>
+    
+                <div id="view-playeras" class="category-view">
+                    <button class="back-btn" onclick="backToCategories()">
+                        <i data-lucide="arrow-left"></i> 
+                        Volver
+                    </button>
+                    <h2 style="color: #ececec; margin-bottom: 20px; text-shadow: 0 0 15px #00bfff;">👕 PLAYERAS</h2>
+                    <div class="products-grid" id="products-playeras"></div>
+                </div>
+    
+                <div id="view-zapatos" class="category-view">
+                    <button class="back-btn" onclick="backToCategories()">
+                        <i data-lucide="arrow-left"></i> 
+                        Volver
+                    </button>
+                    <h2 style="color: #ffffff; margin-bottom: 20px; text-shadow: 0 0 15px #00e5ff;">👟 ZAPATOS</h2>
+                    <div class="products-grid" id="products-zapatos"></div>
+                </div>
+    
+                <div id="view-pantalones" class="category-view">
+                    <button class="back-btn" onclick="backToCategories()">
+                        <i data-lucide="arrow-left"></i> 
+                        Volver
+                    </button>
+                    <h2 style="color: #ffffff; margin-bottom: 20px; text-shadow: 0 0 15px #00d9ff;">👖 PANTALONES</h2>
+                    <div class="products-grid" id="products-pantalones"></div>
+                </div>
+            </div>
+    
+            <div id="page-cart" class="page-section">
+                <div class="cart-container">
+                    <h2 style="text-align: center; color: #00ffff; margin-bottom: 30px; text-shadow: 0 0 15px #00ffff;">🛒 MI CARRITO 🛒</h2>
+                    <div id="cart-items"></div>
+                    
+                    <div class="order-form">
+                        <h3 style="color: #ffd500; margin-bottom: 20px; text-shadow: 0 0 15px #ff7700;">📝 DATOS DEL PEDIDO</h3>
+                        <div class="form-group">
+                            <label>Nombre:</label>
+                            <input type="text" id="order-name" placeholder="Tu nombre">
+                        </div>
+                        <div class="form-group">
+                            <label>Talla:</label>
+                            <select id="order-size">
+                                <option value="">Selecciona...</option>
+                                <option value="XS">XS</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Estilo:</label>
+                            <input type="text" id="order-style" placeholder="Ej: Casual, Deportivo">
+                        </div>
+                        <div class="form-group">
+                            <label>Color:</label>
+                            <input type="text" id="order-color" placeholder="Tu color preferido">
+                        </div>
+                        <button class="confirm-btn" onclick="confirmOrder()"> confirmar en
+                        <i class="fab fa-whatsapp" style="font-size:2rem; color:#000000;"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+    
+            <div id="page-info" class="page-section">
+                <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+                    <h2 style="color: #ff006a; margin-bottom: 30px; text-shadow: 0 0 15px #ff00ff;">ℹ️ INFORMACIÓN</h2>
+                    <p style="color: #00ff00; line-height: 1.8; font-size: 1.1em;">
+                        Bienvenido a NEON SHOP, tu tienda futurista de ropa y zapatos. 
+                        Ofrecemos los mejores productos con diseños únicos y calidad garantizada.
+                    </p>
+                    <p style="color: #00ffff; margin-top: 20px; font-size: 1.2em;">
+                        📱 Contacto: +52 1234567890<br>
+                        📧 Email: info@neonshop.com<br>
+                        🌐 Síguenos en redes sociales
+                    </p>
+                </div>
+            </div>
+    
+        </div> <div class="nav-bar">
+            
+            <div class="nav-item" onclick="changePage('home')"> 
+                <div class="nav-icon"><i data-lucide="store"></i></div>
+                <div class="nav-label">Inicio</div>
+            </div>
+            
+            <div class="nav-item" onclick="changePage('categories')">
+                <div class="nav-icon"><i data-lucide="package"></i></div>
+                <div class="nav-label">Categorías</div>
+            </div>
+            
+            <div class="nav-item" onclick="changePage('cart')">
+                <div class="nav-icon"><i data-lucide="shopping-cart"></i></div>
+                <div class="nav-label">Carrito</div>
+                <div class="cart-badge" id="cart-badge">0</div>
+            </div>
+            
+            <div class="nav-item" onclick="changePage('info')">
+                <div class="nav-icon"><i data-lucide="info"></i></div>
+                <div class="nav-label">Info</div>
+            </div>
+        </div>
+        
+        <div id="product-modal" class="modal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal()"><i data-lucide="circle-x"></i></button>
+                <div class="modal-gallery">
+                    <div class="modal-image" id="modal-image"></div>
+                    <button class="gallery-nav prev" onclick="prevImage()"><i data-lucide="chevrons-left"></i></button>
+                    <button class="gallery-nav next" onclick="nextImage()"><i data-lucide="chevrons-right"></i></button>
+                    <div class="gallery-counter" id="gallery-counter">1 / 3</div>
+                </div>
+                <div class="modal-info">
+                    <h2 id="modal-name"></h2>
+                    <p id="modal-description"></p>
+                    <p style="font-size: 1.8em; color: #ffea00;  font-weight: 900; text-shadow: 0 0 15px #ff8400;" id="modal-price"></p>
+                    <button class="add-to-cart-btn" onclick="addToCart()">AGREGAR AL CARRITO <i data-lucide="shopping-cart"></i></button>
+                </div>
+            </div>
+        </div>
+    
+        <script src="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/umd/photoswipe.umd.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/umd/photoswipe-lightbox.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+        <script src="script.js"></script> 
+    </body>
+
+    <script>
+
+// Database - Productos para el modal
+const products = {
+    sudaderas: [
+        {
+            id: 1,
+            name: 'Sudadera Cyber',
+            price: 599,
+            description: 'Sudadera estilo cyberpunk con detalles neón',
+            images: ['a1.jpg', 'a2.jpg', 'a3.jpg']
+        },
+        {
+            id: 2,
+            name: 'Hoodie Tech',
+            price: 699,
+            description: 'Hoodie tecnológico con capucha',
+            images: ['hoodie-tech-1.jpg', 'hoodie-tech-2.jpg', 'hoodie-tech-3.jpg']
+        },
+        {
+            id: 3,
+            name: 'Sudadera RGB',
+            price: 549,
+            description: 'Sudadera con iluminación RGB',
+            images: ['sudadera-rgb-1.jpg', 'sudadera-rgb-2.jpg', 'sudadera-rgb-3.jpg']
+        }
+    ],
+    playeras: [
+        { id: 4, name: 'Playera Neon', price: 299, description: 'Playera con estampado neón', images: ['👕', '💚', '💙'] },
+        { id: 5, name: 'T-Shirt Gamer', price: 349, description: 'Playera gamer edición limitada', images: ['🎮', '🕹️', '👾'] },
+        { id: 6, name: 'Polo Futurista', price: 399, description: 'Polo con diseño futurista', images: ['👚', '🌟', '✨'] }
+    ],
+    zapatos: [
+        { id: 7, name: 'Sneakers LED', price: 1299, description: 'Tenis con luces LED integradas', images: ['👟', '⚡', '🔆'] },
+        { id: 8, name: 'Boots Cyber', price: 1499, description: 'Botas estilo cyberpunk', images: ['👢', '🌙', '⭐'] },
+        { id: 9, name: 'Runner Tech', price: 1199, description: 'Zapatillas tecnológicas para correr', images: ['🥾', '💨', '🏃'] }
+    ],
+    pantalones: [
+        { id: 10, name: 'Jeans Tech', price: 799, description: 'Jeans con tecnología anti-manchas', images: ['👖', '🌊', '💎'] },
+        { id: 11, name: 'Cargo Future', price: 699, description: 'Pantalón cargo futurista', images: ['🩳', '🔧', '⚙️'] },
+        { id: 12, name: 'Jogger Pro', price: 649, description: 'Jogger profesional deportivo', images: ['👟', '🏋️', '💪'] }
+    ]
+};
+
+let cart = [];
+let currentProduct = null;
+let currentImageIndex = 0;
+
+// Referencias del DOM para el visor (Galería de Imágenes)
+const galleryContainer = document.getElementById('galleryContainer');
+const imageVisor = document.getElementById('imageVisor');
+const visorClose = document.getElementById('visorClose');
+const visorImage = document.getElementById('visorImage');
+const visorDescription = document.getElementById('visorDescription');
+const visorDescriptionContainer = document.getElementById('visorDescriptionContainer');
+const visorImageContainer = document.getElementById('visorImageContainer');
+const visorImageWrapper = document.getElementById('visorImageWrapper');
+
+// Variables de estado del visor
+let scale = 1;
+let posX = 0;
+let posY = 0;
+let isDescriptionVisible = true;
+let currentVisorImageIndex = 0;
+let touchStartX = 0;
+let touchStartY = 0;
+let touchStartDistance = 0;
+let touchStartScale = 1;
+let touchStartPosX = 0;
+let touchStartPosY = 0;
+let isMultiTouch = false;
+let isSingleTouchMove = false;
+let hasMoved = false;
+let lastTapTime = 0;
+
+
+// ===============================================
+// === 1. LÓGICA DE INICIALIZACIÓN Y NAVEGACIÓN ===
+// ===============================================
+
+function init() {
+    loadCategoryProducts();
+    generateGallery();
+
+    // Asegura que los iconos Lucide se creen
+    if (typeof lucide !== 'undefined' && lucide.createIcons) {
+        lucide.createIcons();
+    }
+    
+    // Asignar listeners de cierre al visor
+    if (visorClose) {
+        visorClose.addEventListener('click', closeVisor);
+    }
+}
+
+function loadCategoryProducts() {
+    Object.keys(products).forEach(category => {
+        const container = document.getElementById(`products-${category}`);
+        if(container) {
+             products[category].forEach(product => {
+                container.innerHTML += createProductCard(product);
+            });
+        }
+    });
+}
+
+function createProductCard(product) {
+    const firstImage = product.images[0];
+    let imageContent;
+
+    const CARD_IMAGE_SIZE = '300px'; 
+    const EMOJI_FONT_SIZE = '2em'; 
+    
+    if (firstImage.endsWith('.jpg') || firstImage.endsWith('.png') || firstImage.endsWith('.gif')) {
+        imageContent = `<img src="${firstImage}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: contain; border-radius: 10px;">`;
+    } else {
+        imageContent = `<div style="font-size: ${EMOJI_FONT_SIZE}; line-height: 1.6; text-align: center;">${firstImage}</div>`;
+    }
+
+    return `
+        <div class="product-card" onclick="openModal(${product.id})">
+            <div class="product-image" style="width: ${CARD_IMAGE_SIZE}; height: ${CARD_IMAGE_SIZE}; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                ${imageContent}
+            </div>
+            <div class="product-name">${product.name}</div>
+            <div class="product-price">$${product.price}</div>
+        </div>
+    `;
+}
+
+function changePage(page) {
+    document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+    
+    const newPage = document.getElementById(`page-${page}`);
+    if (newPage) {
+        newPage.classList.add('active');
+    }
+    
+    const targetNavItem = document.querySelector(`.nav-item[onclick*="changePage('${page}')"]`);
+    if (targetNavItem) {
+        targetNavItem.classList.add('active');
+    }
+
+    if (page === 'categories') {
+        backToCategories();
+    }
+
+    if (page === 'cart') {
+        renderCart();
+    }
+}
+
+function showCategory(category) {
+    const categoriesMain = document.getElementById('categories-main');
+    if (categoriesMain) categoriesMain.style.display = 'none';
+    
+    document.querySelectorAll('.category-view').forEach(el => el.classList.remove('active'));
+    
+    const viewCategory = document.getElementById(`view-${category}`);
+    if (viewCategory) viewCategory.classList.add('active');
+}
+
+function backToCategories() {
+    const categoriesMain = document.getElementById('categories-main');
+    if (categoriesMain) categoriesMain.style.display = 'block';
+    
+    document.querySelectorAll('.category-view').forEach(el => el.classList.remove('active'));
+}
+
+
+// ===============================================
+// === 2. LÓGICA DEL MODAL DE PRODUCTO (TIENDA) ===
+// ===============================================
+
+function openModal(productId) {
+    const allProducts = Object.values(products).flat();
+    currentProduct = allProducts.find(p => p.id === productId);
+    currentImageIndex = 0;
+    
+    document.getElementById('modal-name').textContent = currentProduct.name;
+    document.getElementById('modal-description').textContent = currentProduct.description;
+    document.getElementById('modal-price').textContent = `$${currentProduct.price}`;
+    updateModalImage();
+    
+    document.getElementById('product-modal').classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('product-modal').classList.remove('active');
+}
+
+function updateModalImage() {
+    const imageElement = document.getElementById('modal-image');
+    if (!currentProduct || !imageElement) return;
+
+    const currentImage = currentProduct.images[currentImageIndex];
+    
+    imageElement.style.fontSize = ''; 
+    imageElement.style.lineHeight = '';
+    imageElement.style.textAlign = '';
+    imageElement.style.minHeight = '300px'; 
+    imageElement.style.display = 'flex';
+    imageElement.style.alignItems = 'center';
+    imageElement.style.justifyContent = 'center';
+
+    if (currentImage.endsWith('.jpg') || currentImage.endsWith('.png') || currentImage.endsWith('.gif')) {
+        imageElement.innerHTML = `<img src="${currentImage}" alt="${currentProduct.name} - Imagen ${currentImageIndex + 1}" style="max-width: 100%; height: auto; border-radius: 10px;">`;
+    } else {
+        imageElement.innerHTML = currentImage;
+        imageElement.style.fontSize = '12em'; 
+        imageElement.style.lineHeight = '300px'; 
+        imageElement.style.textAlign = 'center';
+    }
+    
+    document.getElementById('gallery-counter').textContent = `${currentImageIndex + 1} / ${currentProduct.images.length}`;
+}
+
+function prevImage() {
+    if (!currentProduct) return;
+    currentImageIndex = (currentImageIndex - 1 + currentProduct.images.length) % currentProduct.images.length;
+    updateModalImage();
+}
+
+function nextImage() {
+    if (!currentProduct) return;
+    currentImageIndex = (currentImageIndex + 1) % currentProduct.images.length;
+    updateModalImage();
+}
+
+
+// ===============================================
+// === 3. LÓGICA DEL CARRITO Y PEDIDOS ===
+// ===============================================
+
+function addToCart() {
+    // ... Lógica del efecto "Fly to Cart" (sin cambios significativos, se mantiene la fluidez) ...
+    const modalImage = document.getElementById('modal-image');
+    const cartIcon = document.querySelector('.nav-item[onclick*="changePage(\'cart\')"]'); 
+
+    if (!modalImage || !cartIcon || !currentProduct) return;
+
+    const imgRect = modalImage.getBoundingClientRect();
+    const cartRect = cartIcon.getBoundingClientRect();
+
+    const flyingImg = document.createElement('div');
+    flyingImg.className = 'flying-image-clone';
+    
+    const currentProductImage = currentProduct.images[currentImageIndex];
+    let initialSize;
+
+    if (currentProductImage.endsWith('.jpg') || currentProductImage.endsWith('.png') || currentProductImage.endsWith('.gif')) {
+        const imgTag = document.createElement('img');
+        imgTag.src = currentProductImage;
+        imgTag.alt = currentProduct.name;
+        imgTag.style.width = '100%';
+        imgTag.style.height = '100%';
+        imgTag.style.objectFit = 'cover';
+        imgTag.style.borderRadius = '10%'; 
+        flyingImg.appendChild(imgTag);
+        
+        initialSize = 90;
+        flyingImg.style.width = initialSize + 'px';
+        flyingImg.style.height = initialSize + 'px'; 
+        flyingImg.style.backgroundColor = 'white';
+        flyingImg.style.padding = '5px';
+        flyingImg.style.boxShadow = '0 0 10px rgba(0, 255, 255, 0.5)';
+        flyingImg.style.lineHeight = 'initial';
+        flyingImg.style.fontSize = 'initial';
+    } else {
+        flyingImg.textContent = currentProductImage; 
+        
+        initialSize = 50;
+        flyingImg.style.width = initialSize + 'px'; 
+        flyingImg.style.height = initialSize + 'px';
+        flyingImg.style.fontSize = '4em';
+        flyingImg.style.lineHeight = initialSize + 'px';
+        flyingImg.style.backgroundColor = 'rgba(255, 255, 255, 0.7)'; 
+    }
+    
+    // ESTILOS INICIALES COMUNES
+    flyingImg.style.position = 'fixed';
+    flyingImg.style.left = imgRect.left + 'px';
+    flyingImg.style.top = imgRect.top + 'px'; 
+    flyingImg.style.textAlign = 'center';
+    flyingImg.style.zIndex = 10000;
+    flyingImg.style.borderRadius = '5%'; 
+    flyingImg.style.opacity = '0.9';
+    flyingImg.style.backgroundColor = 'transparent'; 
+    flyingImg.style.pointerEvents = 'none';
+    flyingImg.style.transition = 'none'; 
+    
+    document.body.appendChild(flyingImg);
+    window.getComputedStyle(flyingImg).opacity;
+
+    // FASE 1: SALTO (0.5s)
+    setTimeout(() => {
+        flyingImg.style.transition = 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        flyingImg.style.top = imgRect.top - 35 + 'px'; 
+        flyingImg.style.transform = 'rotate(360deg)'; 
+    }, 15); 
+
+    // FASE 2: VUELO HACIA EL CARRITO (1s)
+    setTimeout(() => {
+        flyingImg.style.transition = 'all 1s ease-in'; 
+        flyingImg.style.left = cartRect.left + (cartRect.width / 2) - (initialSize / 2) + 'px';
+        flyingImg.style.top = cartRect.top + (cartRect.height / 2) - (initialSize / 2) + 'px';
+        flyingImg.style.transform = 'scale(0)'; 
+        flyingImg.style.width = '0px'; 
+        flyingImg.style.height = '0px';
+        flyingImg.style.opacity = '0';
+    }, 515);
+
+    // ACCIONES AL FINAL DE LA ANIMACIÓN
+    setTimeout(() => {
+        flyingImg.remove(); 
+        cart.push(currentProduct);
+        updateCartBadge();
+        closeModal();
+        
+        cartIcon.style.animation = 'bounce 0.4s';
+        setTimeout(() => cartIcon.style.animation = '', 400); 
+    }, 1515); 
+}
+
+
+function updateCartBadge() {
+    const badge = document.getElementById('cart-badge');
+    if (badge) {
+        badge.textContent = cart.length;
+    }
+}
+
+function renderCart() {
+    const container = document.getElementById('cart-items');
+    if (!container) return;
+
+    if (cart.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: #00ffff; font-size: 1.3em;">Tu carrito está vacío 🛒</p>';
+        return;
+    }
+
+    container.innerHTML = '';
+    let total = 0;
+
+    cart.forEach((product, index) => {
+        total += product.price;
+
+        const firstImage = product.images[0];
+        let itemImageContent;
+
+        if (firstImage.endsWith('.jpg') || firstImage.endsWith('.png') || firstImage.endsWith('.gif')) {
+            itemImageContent = `<img src="${firstImage}" alt="${product.name}" style="width: 80px; height: 80px; border-radius: 5px; object-fit: cover;">`;
+        } else {
+            itemImageContent = `<div style="font-size: 2em; line-height: 80px; text-align: center;">${firstImage}</div>`;
+        }
+
+        container.innerHTML += `
+            <div class="cart-item">
+                <div class="cart-item-image">
+                    ${itemImageContent}
+                </div>
+                <div class="cart-item-info">
+                    <div style="color: #00ff00; font-size: 1.2em;">${product.name}</div>
+                    <div style="color: #ff00ff; font-size: 1.3em; margin-top: 5px;">$${product.price}</div>
+                </div>
+                <button onclick="removeFromCart(${index})" style="background: rgba(255, 0, 0, 0.3); border: 2px solid #ff0000; color: #ff0000; padding: 10px 15px; border-radius: 5px; cursor: pointer;">🗑️</button>
+            </div>
+        `;
+    });
+
+    container.innerHTML += `
+        <div style="text-align: right; margin-top: 20px; padding: 20px; background: rgba(26, 26, 46, 0.8); border: 2px solid #00ff00; border-radius: 10px;">
+            <span style="color: #00ffff; font-size: 1.5em;">TOTAL: </span>
+            <span style="color: #ff00ff; font-size: 2em; font-weight: bold; text-shadow: 0 0 15px #ff00ff;">$${total}</span>
+        </div>
+    `;
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCartBadge();
+    renderCart();
+}
+
+function confirmOrder() {
+    const name = document.getElementById('order-name').value.trim();
+    const size = document.getElementById('order-size').value;
+    const style = document.getElementById('order-style').value.trim();
+    const color = document.getElementById('order-color').value.trim();
+
+    if (!name || !size || !style || !color || cart.length === 0) {
+        alert('⚠️ Por favor completa todos los campos del formulario y agrega productos al carrito.');
+        return;
+    }
+
+    let message = `🌟 *NUEVO PEDIDO - NEON SHOP* 🌟\n\n`;
+    message += `👤 *Cliente:* ${name}\n`;
+    message += `📏 *Talla:* ${size}\n`;
+    message += `🎨 *Estilo:* ${style}\n`;
+    message += `🌈 *Color:* ${color}\n\n`;
+    message += `📦 *PRODUCTOS:*\n`;
+    
+    let total = 0;
+    cart.forEach((product, index) => {
+        message += `${index + 1}. ${product.name} - $${product.price}\n`;
+        total += product.price;
+    });
+
+    message += `\n💰 *TOTAL:* $${total} \n\n`;
+    message += `¡Gracias por tu compra! 🚀`;
+
+    const whatsappNumber = '5212221234567'; 
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+    window.open(whatsappURL, '_blank');
+}
+
+
+// ===============================================
+// === 4. LÓGICA DE GALERÍA Y VISOR DE IMÁGENES ===
+// (Optimizado para Touch/Zoom)
+// ===============================================
+
+const imageData = [
+    // Usamos imágenes de ejemplo, reemplaza con tus propias URLs
+    { src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800', description: 'Hermoso paisaje de montañas al atardecer con cielo despejado y nubes rosadas.' },
+    { src: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800', description: 'Naturaleza en su máximo esplendor, bosque verde con árboles altos.' },
+    { src: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800', description: 'Playa paradisíaca con arena blanca y agua cristalina color turquesa.' },
+    { src: 'https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=800', description: 'Atardecer en el campo con flores silvestres y cielo naranja.' },
+    { src: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800', description: 'Lago tranquilo rodeado de montañas con reflejo perfecto en el agua.' },
+    { src: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800', description: 'Sendero en el bosque con luz del sol filtrándose entre los árboles.' }
+];
+
+function generateGallery() {
+    if (!galleryContainer) return;
+    galleryContainer.innerHTML = '';
+    imageData.forEach((item, index) => {
+        const galleryItem = document.createElement('div');
+        galleryItem.className = 'gallery-item';
+        galleryItem.innerHTML = `
+            <img src="${item.src}" alt="Imagen ${index + 1}">
+            <div class="gallery-item-description">${item.description}</div>
+        `;
+        galleryItem.addEventListener('click', (e) => {
+            // Prevenir la apertura si el clic fue en la descripción
+            if (e.target.classList.contains('gallery-item-description')) return;
+            openVisor(index);
+        });
+        galleryContainer.appendChild(galleryItem);
+    });
+}
+
+function openVisor(index) {
+    const item = imageData[index];
+    currentVisorImageIndex = index;
+    if (visorImage) visorImage.src = item.src;
+    if (visorDescription) visorDescription.textContent = item.description;
+    if (imageVisor) imageVisor.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    resetZoom();
+    showControls(); // Asegura que la descripción y el cierre sean visibles al abrir
+}
+
+function closeVisor() {
+    if (imageVisor) imageVisor.classList.remove('active');
+    document.body.style.overflow = '';
+    resetZoom();
+}
+
+function resetZoom() {
+    scale = 1;
+    posX = 0;
+    posY = 0;
+    hasMoved = false; // Resetear movimiento al cerrar
+    updateTransform();
+}
+
+function updateTransform() {
+    // Asegura la fluidez deshabilitando la transición CSS durante el toque
+    const transition = (isMultiTouch || isSingleTouchMove || hasMoved) ? 'none' : 'transform 0.25s ease-out';
+    if (visorImageWrapper) {
+        visorImageWrapper.style.transition = transition;
+        // Aplicar la corrección para centrar la imagen después del pan/zoom
+        visorImageWrapper.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
+    }
+}
+
+function showControls() {
+    isDescriptionVisible = true;
+    if (visorDescriptionContainer) visorDescriptionContainer.classList.remove('hidden');
+    if (visorClose) visorClose.classList.remove('hidden');
+}
+
+// === GESTIÓN DE EVENTOS TÁCTILES Y GESTOS ===
+
+function getDistance(touches) {
+    if (touches.length < 2) return 0;
+    const dx = touches[0].pageX - touches[1].pageX;
+    const dy = touches[0].pageY - touches[1].pageY;
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
+// Se añaden los listeners SÓLO si el contenedor existe
+if (visorImageContainer) {
+    
+    // Función para manejar el toque único (alternar descripción/cierre)
+    visorImageContainer.addEventListener('click', (e) => {
+        // Ejecutar solo si no hubo movimiento significativo (ni zoom, ni arrastre)
+        if (scale === 1 && !hasMoved) { 
+            isDescriptionVisible = !isDescriptionVisible;
+            if (visorDescriptionContainer) {
+                visorDescriptionContainer.classList.toggle('hidden', !isDescriptionVisible);
+            }
+            if (visorClose) {
+                visorClose.classList.toggle('hidden', !isDescriptionVisible);
+            }
+        }
+        hasMoved = false; // Resetear el movimiento después de un posible clic
+    });
+    
+    visorImageContainer.addEventListener('touchstart', (e) => {
+        // Prevenir el menú contextual en Android
+        if (e.touches.length > 0) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            touchStartPosX = posX;
+            touchStartPosY = posY;
+            hasMoved = false;
+
+            if (e.touches.length === 2) {
+                isMultiTouch = true;
+                touchStartDistance = getDistance(e.touches);
+                touchStartScale = scale;
+            } else if (e.touches.length === 1) {
+                isSingleTouchMove = true;
+            }
+        }
+    });
+
+    visorImageContainer.addEventListener('touchmove', (e) => {
+        if (!imageVisor.classList.contains('active')) return;
+        
+        // Permite el desplazamiento de la página solo si el zoom es 1
+        if (scale === 1) {
+            // El desplazamiento lateral del cuerpo está deshabilitado por el CSS global, 
+            // pero permitimos el vertical si no estamos haciendo zoom.
+            // touch-action: none en CSS ayuda a gestionar esto.
+            
+        } else {
+            e.preventDefault(); // Previene el desplazamiento de la página si hay zoom (scale > 1)
+        }
+
+
+        if (isMultiTouch && e.touches.length === 2) {
+            // === PINCH-TO-ZOOM ===
+            const currentDistance = getDistance(e.touches);
+            const scaleFactor = currentDistance / touchStartDistance;
+            
+            // Limitamos el zoom (1x a 4x)
+            scale = Math.max(1, Math.min(touchStartScale * scaleFactor, 4)); 
+            hasMoved = true;
+        } 
+        
+        if (isSingleTouchMove && e.touches.length === 1 && scale > 1) {
+            // === DESPLAZAMIENTO (PAN) ===
+            const deltaX = e.touches[0].clientX - touchStartX;
+            const deltaY = e.touches[0].clientY - touchStartY;
+
+            posX = touchStartPosX + deltaX;
+            posY = touchStartPosY + deltaY;
+            hasMoved = true;
+        }
+
+        if (hasMoved) {
+            updateTransform();
+        }
+    });
+
+    visorImageContainer.addEventListener('touchend', (e) => {
+        isMultiTouch = false;
+        isSingleTouchMove = false;
+
+        // Limpiar el desplazamiento si la imagen no está ampliada (scale = 1)
+        if (scale === 1) {
+             posX = 0;
+             posY = 0;
+             updateTransform();
+        }
+
+        // === DOBLE TOQUE para zoom 1x / 2x ===
+        const currentTime = new Date().getTime();
+        const tapLength = currentTime - lastTapTime;
+        
+        // Si el tiempo entre taps es corto y NO hubo un arrastre significativo
+        const movedDistance = Math.abs(e.changedTouches[0].clientX - touchStartX) + Math.abs(e.changedTouches[0].clientY - touchStartY);
+        const isTap = movedDistance < 10; // Consideramos que es un tap si el movimiento fue menor a 10px
+
+        if (tapLength < 300 && isTap && !isMultiTouch) {
+            // Es un doble tap
+            if (scale > 1) {
+                resetZoom(); // Vuelve a 1x
+            } else {
+                // Alterna a 2x
+                scale = 2; 
+                posX = 0;
+                posY = 0;
+                updateTransform();
+            }
+        }
+        
+        lastTapTime = currentTime;
+        // La variable 'hasMoved' se resetea en el 'click' handler para evitar interferencias
+        
+        // Recalcular la posición final de la imagen ampliada para evitar que se salga de los límites
+        if (scale > 1) {
+             const imgRect = visorImageWrapper.getBoundingClientRect();
+             const containerRect = visorImageContainer.getBoundingClientRect();
+
+             const limitX = (imgRect.width - containerRect.width) / 2 / scale;
+             const limitY = (imgRect.height - containerRect.height) / 2 / scale;
+
+             posX = Math.max(-limitX, Math.min(limitX, posX));
+             posY = Math.max(-limitY, Math.min(limitY, posY));
+
+             // Aplicar la corrección con una animación suave
+             updateTransform();
+        }
+    });
+}
+
+
+// ===============================================
+// === 5. SECUENCIA DE INTRODUCCIÓN Y ANIMACIÓN ===
+// ===============================================
+
+const neonColors = ["#000000", "#14FFAA", "#FFFFFF"];
+const canvas = document.getElementById('canvas'); 
+const ctx = canvas ? canvas.getContext('2d') : null;
+
+if (canvas && ctx) {
+    // ... Lógica del Canvas (sin cambios) ...
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const lines = []; 
+    for(let i = 0; i < 700; i++) { 
+        lines.push({ 
+            angle: Math.random() * Math.PI * 2, 
+            distance: Math.random() * 100, 
+            speed: 5 + Math.random() * 18, 
+            thickness: Math.random() * 4 + 1, 
+            color: neonColors[Math.floor(Math.random() * neonColors.length)]
+        });
+    }
+
+    function draw() {
+        ctx.fillStyle = 'rgba(0,0,0,0.08)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height); 
+
+        lines.forEach(line => {
+            line.distance += line.speed; 
+            const x = canvas.width/2 + Math.cos(line.angle) * line.distance; 
+            const y = canvas.height/2 + Math.sin(line.angle) * line.distance; 
+
+            ctx.globalAlpha = Math.min(line.distance / 250, 1);
+            ctx.strokeStyle = line.color; 
+            ctx.lineWidth = line.thickness * ctx.globalAlpha; 
+            ctx.beginPath(); 
+            ctx.moveTo(canvas.width/2, canvas.height/2); 
+            ctx.lineTo(x, y); 
+            ctx.stroke(); 
+
+            if (line.distance > Math.max(canvas.width, canvas.height) + 300) { 
+                line.distance = 0; 
+                line.angle = Math.random() * Math.PI * 2; 
+                line.color = neonColors[Math.floor(Math.random() * neonColors.length)]; 
+            }
+        });
+        requestAnimationFrame(draw); 
+    }
+    draw();
+
+    window.addEventListener('resize', () => { 
+        canvas.width = window.innerWidth; 
+        canvas.height = window.innerHeight; 
+    });
+}
+
+
+// SECUENCIA DE INTRODUCCIÓN CORREGIDA
+setTimeout(() => {
+  const logo = document.getElementById('logo');
+  if (logo) logo.classList.add('show');
+}, 700);
+
+setTimeout(() => {
+  const texto = "EVOLUCION";
+  const div = document.getElementById('text');
+  if (!div) return;
+  
+  div.classList.add('show');
+  let i = 0;
+  const type = () => {
+    if (i < texto.length) {
+      div.textContent += texto[i++];
+      setTimeout(type, 90);
+    }
+  };
+  type();
+}, 1000);
+
+// FADE OUT DE INTRO Y MOSTRAR MAIN
+setTimeout(() => {
+  const intro = document.getElementById('intro');
+  const main = document.getElementById('main');
+  
+  if (!intro || !main) return;
+  
+  intro.style.opacity = '0'; // INICIA el fade out (CSS transition: 1.4s)
+  
+  setTimeout(() => {
+    intro.style.display = 'none';
+    main.style.opacity = '1';
+    
+    // Muestra la primera página de la tienda (HOME)
+    changePage('home'); 
+  }, 1400); // Duración del fade out (según tu CSS)
+}, 4500); //  Tiempo total para la animación del logo y texto
+
+// ===============================================
+// === Inicialización al cargar el DOM ===
+// ===============================================
+document.addEventListener('DOMContentLoaded', init);
+
+        </script>
+</body>
+</html>
